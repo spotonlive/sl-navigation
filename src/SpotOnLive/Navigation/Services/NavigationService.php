@@ -39,6 +39,6 @@ class NavigationService implements NavigationServiceInterface
             }
         }
 
-        throw new ContainerException('The container \'%s\' does not exist');
+        throw new ContainerException(sprintf('The container \'%s\' does not exist', $name));
     }
 }
