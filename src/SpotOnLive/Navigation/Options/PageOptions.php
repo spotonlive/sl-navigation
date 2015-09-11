@@ -2,13 +2,15 @@
 
 namespace SpotOnLive\Navigation\Options;
 
-class ContainerOptions extends Options implements OptionsInterface
+class PageOptions extends Options implements OptionsInterface
 {
     /** @var array */
     protected $defaults = [
+        'label' => '',
+        'escape_html' => true,
+
         'options' => [
-            'ulClass' => null,
-            'depth' => null,
+            'liClass' => null,
         ],
 
         'pages' => [

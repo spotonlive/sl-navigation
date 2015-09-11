@@ -46,4 +46,22 @@ class Options implements OptionsInterface
     {
         $this->options = $options;
     }
+
+    /**
+     * Get value from key
+     *
+     * @param $key
+     * @return array|mixed|null|string
+     */
+    public function get($key)
+    {
+        if (!array_key_exists($key, $this->options)) {
+            return null;
+        }
+
+        /** @var string|array|mixed $options */
+        $options = $this->options[$key];
+
+        return $options;
+    }
 }
