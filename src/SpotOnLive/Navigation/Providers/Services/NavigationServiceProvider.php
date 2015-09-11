@@ -28,7 +28,7 @@ class NavigationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('SpotOnLive\Navigation\Services\NavigationService', function(Application $app) {
+        $this->app->bind('SpotOnLive\Navigation\Services\NavigationService', function (Application $app) {
             $navigationConfig = config('navigation');
 
             if (is_null($navigationConfig)) {
@@ -44,7 +44,8 @@ class NavigationServiceProvider extends ServiceProvider
     private function mergeConfig()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../../../config/config.php', 'navigation'
+            __DIR__ . '/../../../../config/config.php',
+            'navigation'
         );
     }
 }
