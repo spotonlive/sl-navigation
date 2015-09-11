@@ -14,7 +14,7 @@ use Illuminate\Foundation\Application;
 use SpotOnLive\Navigation\Exceptions\IllegalConfigurationException;
 use SpotOnLive\Navigation\Services\NavigationService;
 
-class AssertionServiceProvider extends ServiceProvider
+class NavigationServiceProvider extends ServiceProvider
 {
     public function boot()
     {
