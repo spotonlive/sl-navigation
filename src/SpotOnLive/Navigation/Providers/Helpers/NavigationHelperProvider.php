@@ -22,7 +22,7 @@ class NavigationHelperProvider extends ServiceProvider
     {
         $this->app->bind('SpotOnLive\Navigation\Helpers\NavigationHelper', function(Application $application) {
             /** @var \SpotOnLive\Navigation\Services\NavigationServiceInterface $navigationService */
-            $navigationService = $application->make('SpotOnLive\Navigation\Service\NavigationService');
+            $navigationService = $application->make('SpotOnLive\Navigation\Services\NavigationService');
 
             return new NavigationHelper($navigationService);
         });
