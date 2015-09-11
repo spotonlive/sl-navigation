@@ -78,6 +78,29 @@ class Page implements PageInterface
             return true;
         }
 
+        // Check for active sub page
+        if ($this->activeSubPage($this->getPages())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check for active sub pages
+     *
+     * @param array|Page[] $pages
+     * @return bool
+     */
+    public function activeSubPage(array $pages)
+    {
+        /** @var Page $page */
+        foreach ($pages as $page) {
+            if ($page->isActive() || $this->activeSubPage($page->getPages())) {
+                return true;
+            }
+        }
+
         return false;
     }
 
