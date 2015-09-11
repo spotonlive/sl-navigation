@@ -24,7 +24,7 @@ class AssertionServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register assertions
+     * Register service
      */
     public function register()
     {

@@ -16,7 +16,7 @@ use SpotOnLive\Navigation\Helpers\NavigationHelper;
 class NavigationHelperProvider extends ServiceProvider
 {
     /**
-     * Register assertions
+     * Register navigation helper
      */
     public function register()
     {
