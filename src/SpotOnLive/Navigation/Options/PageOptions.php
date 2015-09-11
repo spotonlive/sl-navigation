@@ -6,15 +6,14 @@ class PageOptions extends Options implements OptionsInterface
 {
     /** @var array */
     protected $defaults = [
-        'label' => '',
-        'escape_html' => true,
-
         'options' => [
+            'label' => 'Forside',
+            'escape_html' => true,
             'liClass' => null,
+            'ulClass' => null,
         ],
 
-        'pages' => [
-
-        ]
+        'attributes' => [],
+        'pages' => []
     ];
 }

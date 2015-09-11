@@ -18,14 +18,36 @@ class Container implements ContainerInterface
         $this->options = new ContainerOptions($config);
     }
 
-    public function render()
+    /**
+     * Render navigation in partial
+     *
+     * @param string $partial
+     * @return string
+     */
+    public function renderPartial($partial)
     {
-        $class = $this->options->get('ulClass');
+        $html = view($partial, [
+            'container' => $this,
+        ]);
 
-        $html = '<ul class="' . $class . '">';
+        return (string) $html;
+    }
+
+    /**
+     * Render navigation
+     *
+     * @param null|integer $maxDepth
+     * @return string
+     */
+    public function render($maxDepth = null)
+    {
+        $options = $this->options->get('options');
+        $class = $options['ulClass'];
+
+        $html = "<ul class=\"" . $class . "\"" . $this->getAttributes() . ">\n";
 
         foreach ($this->getPages() as $page) {
-            $html .= $this->renderPage($page, 0);
+            $html .= $this->renderPage($page, $maxDepth);
         }
 
         $html .= '</ul>';
@@ -33,19 +55,54 @@ class Container implements ContainerInterface
         return $html;
     }
 
-    public function renderPage(Page $page, $depth = 0)
+    /**
+     * Render page
+     *
+     * @param \SpotOnLive\Navigation\Navigation\Page $page
+     * @param null $maxDepth
+     * @param int $depth
+     * @return null|string
+     * @throws \SpotOnLive\Navigation\Exceptions\NoRouteException
+     */
+    public function renderPage(Page $page, $maxDepth = null, $depth = 0)
     {
-        $options = $page->getOptions();
-        $class = null;
+        // Max depth
+        if (!is_null($maxDepth) && $depth > $maxDepth) {
+            return null;
+        }
 
-        $html = '<li class="' . $class . '">';
-        $html .= '</li>';
+        $options = $page->getOptions()->get('options');
+        $classes = [];
+
+        // CSS class for li
+        if ($options['liClass']) {
+            $classes[] = $options['liClass'];
+        }
+
+        // Active page
+        if ($page->isActive()) {
+            $classes[] = 'active';
+        }
+
+        $html = "   <li class=\"" . implode(" ", $classes) . "\"" . $page->getAttributes('li') . ">\n";
+        $html .= '      <a href="' . $page->getUrl() . '">' . $page->getLabel() . "</a>\n";
+
+        if (count($page->getPages()) && (is_null($maxDepth) || $maxDepth != $depth)) {
+            $pageOptions = $page->getOptions()->get('options');
+            $ulClass = $pageOptions['ulClass'];
+
+            $html .= "      <ul class=\"" . $ulClass . "\"" . $page->getAttributes('ul') . ">\n";
+
+            foreach ($page->getPages() as $subPage) {
+                $html .= $this->renderPage($subPage, $maxDepth, ($depth + 1));
+            }
+
+            $html .= "      </ul>\n";
+        }
+
+        $html .= "    </li>\n";
 
         return $html;
-    }
-
-    public function renderPartial()
-    {
     }
 
     /**
@@ -64,9 +121,38 @@ class Container implements ContainerInterface
         $pages = [];
 
         foreach ($pagesArray as $page) {
-            $pages = new Page($page);
+            $pages[] = new Page($page);
         }
 
         return $pages;
+    }
+
+    /**
+     * Get attributes as string
+     *
+     * @return string
+     */
+    public function getAttributes()
+    {
+        $attributes = $this->options->get('ulAttributes');
+
+        if (is_null($attributes)) {
+            $attributes = [];
+        }
+
+        $attributesString = [];
+
+        foreach ($attributes as $attr => $val) {
+            $val = htmlspecialchars($val);
+            $attributesString[] = sprintf('%s="%s"', $attr, $val);
+        }
+
+        $attributes = implode(" ", $attributesString);
+
+        if (!$attributes) {
+            return null;
+        }
+
+        return " " . $attributes;
     }
 }

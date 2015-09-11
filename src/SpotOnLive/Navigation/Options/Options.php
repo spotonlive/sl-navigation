@@ -12,7 +12,29 @@ class Options implements OptionsInterface
 
     public function __construct(array $options = [])
     {
-        $this->options = array_merge($this->defaults, $options);
+        $this->options = $this->mergeAssociative($this->defaults, $options);
+    }
+
+    /**
+     * Merge associative array
+     *
+     * @param array $a
+     * @param array $b
+     * @return array
+     */
+    public function mergeAssociative(array $a, array $b)
+    {
+        $mergedArray = $a;
+
+        foreach ($b as $k => $v) {
+            if (is_array($v) && isset($a[$k]) && is_array($a[$k])) {
+                $mergedArray[$k] = $this->mergeAssociative($a[$k], $v);
+            } else {
+                $mergedArray[$k] = $v;
+            }
+        }
+
+        return $mergedArray;
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace SpotOnLive\Navigation\Navigation;
 
+use Route;
+use SpotOnLive\Navigation\Exceptions\NoRouteException;
 use SpotOnLive\Navigation\Options\PageOptions;
 
 class Page implements PageInterface
@@ -24,21 +26,59 @@ class Page implements PageInterface
      */
     public function getLabel()
     {
-        $options = $this->options;
+        $options = $this->options->get('options');
 
         /** @var string $label */
-        $label = $options->get('label');
+        $label = $options['label'];
 
-        if ($options->get('escape_html')) {
+        if ($options['escape_html']) {
             $label = htmlspecialchars($label);
         }
 
         return $label;
     }
 
+    /**
+     * Get url
+     *
+     * @return string
+     * @throws NoRouteException
+     */
+    public function getUrl()
+    {
+        $options = $this->options->get('options');
+
+        if (!isset($options['route']) && !isset($options['url'])) {
+            throw new NoRouteException('Please provide a route or url');
+        }
+
+        if (isset($options['route'])) {
+            return route($options['route']);
+        }
+
+        return $options['url'];
+    }
+
     public function isActive()
     {
+        $options = $this->options->get('options');
 
+        /** @var \Illuminate\Routing\Route $currentRoute */
+        $currentRoute = Route::current();
+
+        if (isset($options['route'])) {
+            if ($currentRoute->getName() == $options['route']) {
+                return true;
+            }
+
+            return false;
+        }
+
+        if ($currentRoute->getUri() == $options['url']) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -55,10 +95,40 @@ class Page implements PageInterface
         $pages = [];
 
         foreach ($pagesArray as $page) {
-            $pages = new Page($page);
+            $pages[] = new Page($page);
         }
 
         return $pages;
+    }
+
+    /**
+     * Get attributes as string
+     *
+     * @param string $type
+     * @return null|string
+     */
+    public function getAttributes($type = "li")
+    {
+        $attributes = $this->options->get($type . 'Attributes');
+
+        if (is_null($attributes)) {
+            $attributes = [];
+        }
+
+        $attributesString = [];
+
+        foreach ($attributes as $attr => $val) {
+            $val = htmlspecialchars($val);
+            $attributesString[] = sprintf('%s="%s"', $attr, $val);
+        }
+
+        $attributes = implode(" ", $attributesString);
+
+        if (!$attributes) {
+            return null;
+        }
+
+        return " " . $attributes;
     }
 
     /**

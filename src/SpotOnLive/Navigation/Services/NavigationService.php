@@ -28,7 +28,7 @@ class NavigationService
      * Get container from name
      *
      * @param $name
-     * @return array
+     * @return Container
      * @throws ContainerException
      */
     public function getContainer($name)

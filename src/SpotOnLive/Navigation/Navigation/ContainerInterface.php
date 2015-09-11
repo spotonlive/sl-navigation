@@ -4,10 +4,24 @@ namespace SpotOnLive\Navigation\Navigation;
 
 interface ContainerInterface
 {
-    public function render();
+    /**
+     * Render menu
+     *
+     * @param int $depth
+     * @return string
+     */
+    public function render($depth = 0);
 
-    public function renderPartial();
+    /**
+     * Render menu through partial
+     *
+     * @param string $partial
+     * @return string
+     */
+    public function renderPartial($partial);
 
-    /** @return array|PageInterface[] */
+    /**
+     * @return array|PageInterface[]
+     */
     public function getPages();
 }

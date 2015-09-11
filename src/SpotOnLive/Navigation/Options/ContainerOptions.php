@@ -11,6 +11,10 @@ class ContainerOptions extends Options implements OptionsInterface
             'depth' => null,
         ],
 
+        'attributes' => [
+
+        ],
+
         'pages' => [
 
         ]
