@@ -5,7 +5,7 @@ namespace SpotOnLive\Navigation\Services;
 use SpotOnLive\Navigation\Exceptions\ContainerException;
 use SpotOnLive\Navigation\Navigation\Container;
 
-class NavigationService
+class NavigationService implements NavigationServiceInterface
 {
     /** @var array */
     protected $config;

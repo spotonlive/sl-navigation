@@ -13,4 +13,15 @@ class NavigationHelper
     {
         $this->navigationService = $navigationService;
     }
+
+    /**
+     * Get container from name
+     *
+     * @param string $name
+     * @return \SpotOnLive\Navigation\Navigation\Container
+     */
+    public function getContainer($name)
+    {
+        return $this->navigationService->getContainer($name);
+    }
 }
