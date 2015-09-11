@@ -4,10 +4,7 @@
 
 **THIS PACKAGE IS UNDER DEVELOPMENT**
 
-## Configuration
-
-### Installation
-Run `$ composer require spotonlive/sl-navigation`
+* Go to [**Getting started**](docs/01. Getting Started.md)
 
 ## Organization & authors
 * [**spotonlive**](https://github.com/spotonlive)
