@@ -1,8 +1,6 @@
-# Assertions for Laravel 5.1
+# Dynamic navigation for Laravel 5.1
 
 [![Latest Stable Version](https://poser.pugx.org/spotonlive/sl-navigation/v/stable)](https://packagist.org/packages/spotonlive/sl-navigation) [![Total Downloads](https://poser.pugx.org/spotonlive/sl-navigation/downloads)](https://packagist.org/packages/spotonlive/sl-navigation) [![Latest Unstable Version](https://poser.pugx.org/spotonlive/sl-navigation/v/unstable)](https://packagist.org/packages/spotonlive/sl-navigation) [![License](https://poser.pugx.org/spotonlive/sl-navigation/license)](https://packagist.org/packages/spotonlive/sl-navigation)
-
-**THIS PACKAGE IS UNDER DEVELOPMENT**
 
 * Go to [**Getting started**](docs/01. Getting Started.md)
 
