@@ -7,7 +7,7 @@
  * @package SpotOnLive\Navigation
  */
 
-namespace SpotOnLive\Assertions\Providers\Services;
+namespace SpotOnLive\Navigation\Providers\Services;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application;
