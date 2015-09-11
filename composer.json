@@ -1,0 +1,33 @@
+{
+  "name": "spotonlive/sl-navigation",
+  "type": "library",
+  "description": "Dynamic navigations for Laravel 5.1",
+  "keywords": [
+    "navigation",
+    "laravel"
+  ],
+  "homepage": "https://github.com/spotonlive/sl-navigation",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Nikolaj Petersen",
+      "email": "nikolaj.lovenhardt@gmail.com",
+      "homepage": "http://spotonmarketing.dk"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "laravel/framework": "~5.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "SpotOnLive\\Navigation\\": "src/SpotOnLive/Navigation/"
+    }
+  },
+  "suggest": {
+    "spotonlive/sl-assertions": "Use assertions in your navigation"
+  }
+}
