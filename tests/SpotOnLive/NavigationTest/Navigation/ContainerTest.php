@@ -3,16 +3,15 @@
 namespace SpotOnLive\Navigation\Navigation;
 
 // Override view
-function view($partial, $data = []) {
+function view($partial, $data = [])
+{
     return \SpotOnLive\NavigationTest\Navigation\ContainerTest::view($partial, $data);
 }
 
 // Tests
 namespace SpotOnLive\NavigationTest\Navigation;
 
-use PHPUnit_Framework_TestCase;
-
-class ContainerTest extends PHPUnit_Framework_TestCase
+class ContainerTest extends \PHPUnit_Framework_TestCase
 {
     /** @var \SpotOnLive\Navigation\Navigation\Container */
     protected $navigation;
