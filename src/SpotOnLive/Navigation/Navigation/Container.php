@@ -41,7 +41,7 @@ class Container implements ContainerInterface
      */
     public function render($maxDepth = null)
     {
-        $options = $this->options->get('options');
+        $options = $this->getOptions()->get('options');
         $class = $options['ulClass'];
 
         $html = "<ul class=\"" . $class . "\"" . $this->getAttributes() . ">\n";
@@ -112,7 +112,7 @@ class Container implements ContainerInterface
      */
     public function getPages()
     {
-        $pagesArray = $this->options->get('pages');
+        $pagesArray = $this->getOptions()->get('pages');
 
         if (is_null($pagesArray)) {
             $pagesArray = [];
@@ -134,7 +134,7 @@ class Container implements ContainerInterface
      */
     public function getAttributes()
     {
-        $attributes = $this->options->get('ulAttributes');
+        $attributes = $this->getOptions()->get('ulAttributes');
 
         if (is_null($attributes)) {
             $attributes = [];
@@ -154,5 +154,21 @@ class Container implements ContainerInterface
         }
 
         return " " . $attributes;
+    }
+
+    /**
+     * @return ContainerOptions
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * @param ContainerOptions $options
+     */
+    public function setOptions($options)
+    {
+        $this->options = $options;
     }
 }
