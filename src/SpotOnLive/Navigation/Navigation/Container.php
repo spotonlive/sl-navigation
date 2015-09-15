@@ -85,7 +85,7 @@ class Container implements ContainerInterface
         }
 
         $html = "   <li class=\"" . implode(" ", $classes) . "\"" . $page->getAttributes('li') . ">\n";
-        $html .= '      <a href="' . $page->getUrl() . '">' . $page->getLabel() . "</a>\n";
+        $html .= '      <a href="' . $page->getUrl() . '"' . $page->getAttributes('a') . '>' . $page->getLabel() . "</a>\n";
 
         if (count($page->getPages()) && (is_null($maxDepth) || $maxDepth != $depth)) {
             $pageOptions = $page->getOptions()->get('options');
