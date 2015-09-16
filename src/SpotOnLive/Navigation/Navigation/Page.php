@@ -70,12 +70,10 @@ class Page implements PageInterface
             if ($currentRoute->getName() == $options['route']) {
                 return true;
             }
-
-            return false;
-        }
-
-        if ($currentRoute->getUri() == $options['url']) {
-            return true;
+        } else {
+            if ($currentRoute->getUri() == $options['url']) {
+                return true;
+            }
         }
 
         // Check for active sub page
