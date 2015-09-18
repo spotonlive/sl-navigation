@@ -7,13 +7,22 @@ class PageOptions extends Options implements OptionsInterface
     /** @var array */
     protected $defaults = [
         'options' => [
-            'label' => 'Forside',
+            // Render in menu
+            'render' => true,
+
+            // Label
+            'label' => '',
             'escape_html' => true,
+
+            // Classes
             'liClass' => null,
             'ulClass' => null,
         ],
 
+        // Attributes
         'attributes' => [],
+
+        // Sub pages
         'pages' => []
     ];
 }

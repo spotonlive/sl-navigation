@@ -121,7 +121,14 @@ class Container implements ContainerInterface
         $pages = [];
 
         foreach ($pagesArray as $page) {
-            $pages[] = new Page($page);
+            $page = new Page($page);
+            $options = $page->getOptions()->get('options');
+
+            if (!$options['render']) {
+                continue;
+            }
+
+            $pages[] = $page;
         }
 
         return $pages;
