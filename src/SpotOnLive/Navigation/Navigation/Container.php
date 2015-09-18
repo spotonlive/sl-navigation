@@ -74,6 +74,11 @@ class Container implements ContainerInterface
         $options = $page->getOptions()->get('options');
         $classes = [];
 
+        // Check if the page should be rendered
+        if (!$options['render']) {
+            return;
+        }
+
         // CSS class for li
         if ($options['liClass']) {
             $classes[] = $options['liClass'];
@@ -123,10 +128,6 @@ class Container implements ContainerInterface
         foreach ($pagesArray as $page) {
             $page = new Page($page);
             $options = $page->getOptions()->get('options');
-
-            if (!$options['render']) {
-                continue;
-            }
 
             $pages[] = $page;
         }
