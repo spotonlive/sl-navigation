@@ -23,6 +23,7 @@
 
             <exclude>
                 <directory>./src/SpotOnLive/Navigation/Providers</directory>
+                <directory>./src/config</directory>
             </exclude>
         </whitelist>
     </filter>
