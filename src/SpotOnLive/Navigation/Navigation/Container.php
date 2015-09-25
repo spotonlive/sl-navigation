@@ -12,13 +12,13 @@ class Container implements ContainerInterface
     protected $options;
 
     /** @var null */
-    protected $assertionService = null;
+    protected $assertionService;
 
     /**
      * @param array $config
      * @param null $assertionService
      */
-    public function __construct(array $config = [], $assertionService)
+    public function __construct(array $config = [], $assertionService = null)
     {
         $this->options = new ContainerOptions($config);
         $this->assertionService = $assertionService;
