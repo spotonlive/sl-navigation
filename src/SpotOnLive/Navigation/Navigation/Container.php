@@ -121,13 +121,14 @@ class Container implements ContainerInterface
         $html = "   <li class=\"" . implode(" ", $classes) . "\"" . $page->getAttributes('li') . ">\n";
         $html .= '      <a href="' . $page->getUrl() . '"' . $page->getAttributes('a') . '>' . $page->getLabel() . "</a>\n";
 
-        if (count($page->getPages()) && (is_null($maxDepth) || $maxDepth != $depth)) {
-            $pageOptions = $page->getOptions()->get('options');
-            $ulClass = $pageOptions['ulClass'];
+        $pages = $page->getPages();
+
+        if (count($pages) && (is_null($maxDepth) || $maxDepth != $depth)) {
+            $ulClass = $options['ulClass'];
 
             $html .= "      <ul class=\"" . $ulClass . "\"" . $page->getAttributes('ul') . ">\n";
 
-            foreach ($page->getPages() as $subPage) {
+            foreach ($pages as $subPage) {
                 $html .= $this->renderPage($subPage, $maxDepth, ($depth + 1));
             }
 
@@ -154,10 +155,8 @@ class Container implements ContainerInterface
 
         $pages = [];
 
-        foreach ($pagesArray as $page) {
-            $page = new Page($page);
-            $options = $page->getOptions()->get('options');
-
+        foreach ($pagesArray as $pageConfig) {
+            $page = new Page($pageConfig);
             $pages[] = $page;
         }
 
@@ -215,5 +214,21 @@ class Container implements ContainerInterface
     protected function getUser()
     {
         return Auth::user();
+    }
+
+    /**
+     * @return null
+     */
+    public function getAssertionService()
+    {
+        return $this->assertionService;
+    }
+
+    /**
+     * @param null $assertionService
+     */
+    public function setAssertionService($assertionService)
+    {
+        $this->assertionService = $assertionService;
     }
 }
