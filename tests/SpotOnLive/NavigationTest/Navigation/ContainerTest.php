@@ -773,6 +773,17 @@ namespace SpotOnLive\NavigationTest\Navigation {
             $this->assertSame($user, $result);
         }
 
+        public function testGetAssertionService()
+        {
+            $assertionService = $this->getMock('stdClass');
+
+            $this->navigation->setAssertionService($assertionService);
+
+            $result = $this->navigation->getAssertionService();
+
+            $this->assertSame($assertionService, $result);
+        }
+
         /**
          * Replace view from laravel
          *
