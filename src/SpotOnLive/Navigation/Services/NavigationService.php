@@ -10,6 +10,12 @@ class NavigationService implements NavigationServiceInterface
     /** @var array */
     protected $config;
 
+    /** @var string */
+    protected $assertionClass = 'SpotOnLive\Assertions\Services\AssertionService';
+
+    /** @var null */
+    protected $assertionService = null;
+
     /**
      * @param array $config
      */
@@ -18,6 +24,13 @@ class NavigationService implements NavigationServiceInterface
         $this->config = $config;
     }
 
+    /**
+     * Render navigation
+     *
+     * @param string $name
+     * @return string
+     * @throws ContainerException
+     */
     public function render($name)
     {
         $container = $this->getContainer($name);
@@ -35,10 +48,42 @@ class NavigationService implements NavigationServiceInterface
     {
         foreach ($this->config['containers'] as $containerName => $container) {
             if ($name == $containerName) {
-                return new Container($container);
+                return new Container($container, $this->getAssertionService());
             }
         }
 
         throw new ContainerException(sprintf('The container \'%s\' does not exist', $name));
+    }
+
+    /**
+     * @return string
+     */
+    public function getAssertionClass()
+    {
+        return $this->assertionClass;
+    }
+
+    /**
+     * @param string $assertionClass
+     */
+    public function setAssertionClass($assertionClass)
+    {
+        $this->assertionClass = $assertionClass;
+    }
+
+    /**
+     * Get assertion service
+     *
+     * @return null
+     */
+    protected function getAssertionService()
+    {
+        if (!$this->assertionService) {
+            if (class_exists($this->assertionClass)) {
+                $this->assertionService = app($this->assertionClass);
+            }
+        }
+
+        return $this->assertionService;
     }
 }

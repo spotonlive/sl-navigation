@@ -2,7 +2,8 @@
 
 namespace SpotOnLive\Navigation\Navigation;
 
-use SpotOnLive\Navigation\Navigation\Page;
+use Auth;
+use SpotOnLive\Navigation\Exceptions\IllegalConfigurationException;
 use SpotOnLive\Navigation\Options\ContainerOptions;
 
 class Container implements ContainerInterface
@@ -10,12 +11,17 @@ class Container implements ContainerInterface
     /** @var ContainerOptions */
     protected $options;
 
+    /** @var null */
+    protected $assertionService = null;
+
     /**
      * @param array $config
+     * @param null $assertionService
      */
-    public function __construct(array $config = [])
+    public function __construct(array $config = [], $assertionService)
     {
         $this->options = new ContainerOptions($config);
+        $this->assertionService = $assertionService;
     }
 
     /**
@@ -56,6 +62,20 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Check for a valid assertion service
+     *
+     * @throws IllegalConfigurationException
+     */
+    protected function validateAssertionService()
+    {
+        if (!$this->assertionService) {
+            throw new IllegalConfigurationException(
+                _('Please require spotonlive/assertions` to use assertions in your navigation')
+            );
+        }
+    }
+
+    /**
      * Render page
      *
      * @param \SpotOnLive\Navigation\Navigation\Page $page
@@ -66,7 +86,7 @@ class Container implements ContainerInterface
      */
     public function renderPage(Page $page, $maxDepth = null, $depth = 0)
     {
-        // Max depth
+        // Check for depth
         if (!is_null($maxDepth) && $depth > $maxDepth) {
             return null;
         }
@@ -76,7 +96,16 @@ class Container implements ContainerInterface
 
         // Check if the page should be rendered
         if (!$options['render']) {
-            return;
+            return null;
+        }
+
+        // Check for assertions
+        if (isset($options['assertion'])) {
+            $this->validateAssertionService();
+
+            if (!$this->assertionService->isGranted($options['assertion'], $this->getUser())) {
+                return null;
+            }
         }
 
         // CSS class for li
@@ -178,5 +207,13 @@ class Container implements ContainerInterface
     public function setOptions($options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * Get user
+     */
+    protected function getUser()
+    {
+        return Auth::user();
     }
 }
