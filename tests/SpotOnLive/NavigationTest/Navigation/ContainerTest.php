@@ -1,9 +1,10 @@
 <?php
-
+// @codingStandardsIgnoreStart
 namespace {
+
     class Auth
     {
-        static function user()
+        public static function user()
         {
             return \SpotOnLive\NavigationTest\Navigation\ContainerTest::$user;
         }
@@ -11,17 +12,18 @@ namespace {
 }
 
 namespace SpotOnLive\Navigation\Navigation {
-// Override view
+
     function view($partial, $data = [])
     {
         return \SpotOnLive\NavigationTest\Navigation\ContainerTest::view($partial, $data);
     }
 }
 
-// Tests
 namespace SpotOnLive\NavigationTest\Navigation {
+
     class ContainerTest extends \PHPUnit_Framework_TestCase
     {
+        // @codingStandardsIgnoreEnd
         /** @var \SpotOnLive\Navigation\Navigation\Container */
         protected $navigation;
 
@@ -800,7 +802,8 @@ namespace SpotOnLive\NavigationTest\Navigation {
         * @param string $name
         * @return \ReflectionMethod
         */
-        protected static function getMethod($name) {
+        protected static function getMethod($name)
+        {
             $class = new \ReflectionClass('SpotOnLive\Navigation\Navigation\Container');
 
             $method = $class->getMethod($name);
