@@ -86,4 +86,20 @@ class NavigationService implements NavigationServiceInterface
 
         return $this->assertionService;
     }
+
+    /**
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    /**
+     * @param array $config
+     */
+    public function setConfig($config)
+    {
+        $this->config = $config;
+    }
 }

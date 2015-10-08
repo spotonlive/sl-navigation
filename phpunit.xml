@@ -20,6 +20,11 @@
         <whitelist addUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
             <directory suffix=".php">./tests</directory>
+
+            <exclude>
+                <directory>./src/SpotOnLive/Navigation/Providers</directory>
+                <directory>./src/config</directory>
+            </exclude>
         </whitelist>
     </filter>
 </phpunit>
