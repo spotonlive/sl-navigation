@@ -72,7 +72,7 @@ class Options implements OptionsInterface
     /**
      * Get value from key
      *
-     * @param $key
+     * @param string $key
      * @return array|mixed|null|string
      */
     public function get($key)

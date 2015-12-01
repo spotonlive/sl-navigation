@@ -9,7 +9,7 @@ interface NavigationServiceInterface
      *
      * @param $name
      * @return \SpotOnLive\Navigation\Navigation\Container
-     * @throws \SpotOnLive\Navigation\Navigation\Container\Exception
+     * @throws \SpotOnLive\Navigation\Exceptions\ContainerException
      */
     public function getContainer($name);
 }

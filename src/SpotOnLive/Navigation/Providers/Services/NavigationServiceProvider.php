@@ -16,6 +16,9 @@ use SpotOnLive\Navigation\Services\NavigationService;
 
 class NavigationServiceProvider extends ServiceProvider
 {
+    /**
+     * Boot
+     */
     public function boot()
     {
         $this->publishes([
@@ -28,7 +31,7 @@ class NavigationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('SpotOnLive\Navigation\Services\NavigationService', function (Application $app) {
+        $this->app->bind(\SpotOnLive\Navigation\Services\NavigationService::class, function (Application $app) {
             $navigationConfig = config('navigation');
 
             if (is_null($navigationConfig)) {
@@ -41,6 +44,9 @@ class NavigationServiceProvider extends ServiceProvider
         $this->mergeConfig();
     }
 
+    /**
+     * Merge config
+     */
     private function mergeConfig()
     {
         $this->mergeConfigFrom(

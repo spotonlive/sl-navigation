@@ -7,10 +7,10 @@ use SpotOnLive\Navigation\Services\NavigationServiceInterface;
 
 class NavigationHelper
 {
-    /** @var NavigationServiceInterface */
+    /** @var NavigationService */
     protected $navigationService;
 
-    public function __construct(NavigationService $navigationService)
+    public function __construct(NavigationServiceInterface $navigationService)
     {
         $this->navigationService = $navigationService;
     }

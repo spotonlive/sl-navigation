@@ -13,6 +13,6 @@ class NavigationHelperFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'SpotOnLive\Navigation\Helpers\NavigationHelper';
+        return \SpotOnLive\Navigation\Helpers\NavigationHelper::class;
     }
 }

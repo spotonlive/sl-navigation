@@ -20,9 +20,9 @@ class NavigationHelperProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('SpotOnLive\Navigation\Helpers\NavigationHelper', function (Application $application) {
+        $this->app->bind(\SpotOnLive\Navigation\Helpers\NavigationHelper::class, function (Application $application) {
             /** @var \SpotOnLive\Navigation\Services\NavigationServiceInterface $navigationService */
-            $navigationService = $application->make('SpotOnLive\Navigation\Services\NavigationService');
+            $navigationService = $application->make(\SpotOnLive\Navigation\Services\NavigationService::class);
 
             return new NavigationHelper($navigationService);
         });
