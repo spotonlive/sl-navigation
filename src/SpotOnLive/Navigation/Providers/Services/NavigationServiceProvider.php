@@ -31,7 +31,7 @@ class NavigationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\SpotOnLive\Navigation\Services\NavigationService::class, function (Application $app) {
+        $this->app->bind(NavigationService::class, function (Application $app) {
             $navigationConfig = config('navigation');
 
             if (is_null($navigationConfig)) {

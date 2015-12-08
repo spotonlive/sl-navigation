@@ -12,6 +12,7 @@ namespace SpotOnLive\Navigation\Providers\Helpers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application;
 use SpotOnLive\Navigation\Helpers\NavigationHelper;
+use SpotOnLive\Navigation\Services\NavigationService;
 
 class NavigationHelperProvider extends ServiceProvider
 {
@@ -20,9 +21,9 @@ class NavigationHelperProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(\SpotOnLive\Navigation\Helpers\NavigationHelper::class, function (Application $application) {
+        $this->app->bind(NavigationHelper::class, function (Application $application) {
             /** @var \SpotOnLive\Navigation\Services\NavigationServiceInterface $navigationService */
-            $navigationService = $application->make(\SpotOnLive\Navigation\Services\NavigationService::class);
+            $navigationService = $application->make(NavigationService::class);
 
             return new NavigationHelper($navigationService);
         });
