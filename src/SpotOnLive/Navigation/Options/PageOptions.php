@@ -10,13 +10,16 @@ class PageOptions extends Options implements OptionsInterface
             // Render in menu
             'render' => true,
 
+            // Route parameters
+            'route_parameters' => [],
+
             // Label
             'label' => '',
             'escape_html' => true,
 
             // Classes
-            'liClass' => null,
-            'ulClass' => null,
+            'li_class' => null,
+            'ul_class' => null,
         ],
 
         // Attributes

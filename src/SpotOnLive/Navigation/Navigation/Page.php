@@ -49,16 +49,21 @@ class Page implements PageInterface
         $options = $this->options->get('options');
 
         if (!isset($options['route']) && !isset($options['url'])) {
-            throw new NoRouteException('Please provide a route or url');
+            throw new NoRouteException();
         }
 
         if (isset($options['route'])) {
-            return route($options['route']);
+            return route($options['route'], $options['route_parameters']);
         }
 
         return $options['url'];
     }
 
+    /**
+     * Check if page is active
+     *
+     * @return bool
+     */
     public function isActive()
     {
         $options = $this->options->get('options');
@@ -66,14 +71,14 @@ class Page implements PageInterface
         /** @var \Illuminate\Routing\Route $currentRoute */
         $currentRoute = Route::current();
 
-        if (isset($options['route'])) {
-            if ($currentRoute->getName() == $options['route']) {
+        // Route
+        if (isset($options['route']) && $currentRoute->getName() == $options['route']) {
                 return true;
-            }
-        } else {
-            if ($currentRoute->getUri() == $options['url']) {
-                return true;
-            }
+        }
+
+        // URL
+        if (isset($options['url']) && $currentRoute->getUri() == $options['url']) {
+            return true;
         }
 
         // Check for active sub page
@@ -130,7 +135,7 @@ class Page implements PageInterface
      */
     public function getAttributes($type = "li")
     {
-        $attributes = $this->options->get($type . 'Attributes');
+        $attributes = $this->options->get($type . '_attributes');
 
         if (is_null($attributes)) {
             $attributes = [];

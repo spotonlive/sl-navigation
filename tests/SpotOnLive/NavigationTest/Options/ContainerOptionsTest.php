@@ -11,7 +11,7 @@ class ContainerOptionsTest extends PHPUnit_Framework_TestCase
 
     protected $defaults = [
         'options' => [
-            'ulClass' => null,
+            'ul_class' => null,
             'depth' => null,
         ],
 
@@ -57,7 +57,7 @@ class ContainerOptionsTest extends PHPUnit_Framework_TestCase
     {
         $options = [
             'options' => [
-                'ulClass' => null,
+                'ul_class' => null,
                 'depth' => null,
             ],
 
