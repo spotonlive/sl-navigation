@@ -170,7 +170,7 @@ class Container implements ContainerInterface
      */
     public function getAttributes()
     {
-        $attributes = $this->getOptions()->get('ulAttributes');
+        $attributes = $this->getOptions()->get('ul_attributes');
 
         if (is_null($attributes)) {
             $attributes = [];

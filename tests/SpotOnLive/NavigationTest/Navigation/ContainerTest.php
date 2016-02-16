@@ -78,7 +78,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(1))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $this->options->expects($this->at(2))
@@ -111,7 +111,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(1))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $this->options->expects($this->at(2))
@@ -147,7 +147,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(1))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $this->options->expects($this->at(2))
@@ -736,7 +736,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(0))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $result = $this->navigation->getAttributes();
@@ -753,7 +753,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(0))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $result = $this->navigation->getAttributes();
