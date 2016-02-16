@@ -48,7 +48,7 @@ class Container implements ContainerInterface
     public function render($maxDepth = null)
     {
         $options = $this->getOptions()->get('options');
-        $class = $options['ulClass'];
+        $class = $options['ul_class'];
 
         $html = "<ul class=\"" . $class . "\"" . $this->getAttributes() . ">\n";
 
@@ -109,8 +109,8 @@ class Container implements ContainerInterface
         }
 
         // CSS class for li
-        if ($options['liClass']) {
-            $classes[] = $options['liClass'];
+        if ($options['li_class']) {
+            $classes[] = $options['li_class'];
         }
 
         // Active page
@@ -124,9 +124,9 @@ class Container implements ContainerInterface
         $pages = $page->getPages();
 
         if (count($pages) && (is_null($maxDepth) || $maxDepth != $depth)) {
-            $ulClass = $options['ulClass'];
+            $ul_class = $options['ul_class'];
 
-            $html .= "      <ul class=\"" . $ulClass . "\"" . $page->getAttributes('ul') . ">\n";
+            $html .= "      <ul class=\"" . $ul_class . "\"" . $page->getAttributes('ul') . ">\n";
 
             foreach ($pages as $subPage) {
                 $html .= $this->renderPage($subPage, $maxDepth, ($depth + 1));
