@@ -65,7 +65,7 @@ class Page implements PageInterface
      *
      * @return bool
      */
-    public function  isActive()
+    public function isActive()
     {
         $options = $this->options->get('options');
 
