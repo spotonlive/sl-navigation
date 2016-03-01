@@ -12,10 +12,11 @@ class PageOptionsTest extends PHPUnit_Framework_TestCase
     protected $defaults = [
         'options' => [
             'render' => true,
+            'route_parameters' => [],
             'label' => '',
             'escape_html' => true,
-            'liClass' => null,
-            'ulClass' => null,
+            'li_class' => null,
+            'ul_class' => null,
         ],
         'attributes' => [],
         'pages' => []
@@ -55,10 +56,11 @@ class PageOptionsTest extends PHPUnit_Framework_TestCase
         $options = [
             'options' => [
                 'render' => true,
+                'route_parameters' => [],
                 'label' => '',
                 'escape_html' => true,
-                'liClass' => null,
-                'ulClass' => null,
+                'li_class' => null,
+                'ul_class' => null,
             ],
             'attributes' => [],
             'pages' => [],

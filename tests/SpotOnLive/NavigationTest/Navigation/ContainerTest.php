@@ -61,7 +61,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
         public function testRenderNoClass()
         {
             $optionsArray = [
-                'ulClass' => null
+                'ul_class' => null
             ];
 
             $attributes = [];
@@ -78,7 +78,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(1))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $this->options->expects($this->at(2))
@@ -94,7 +94,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
         public function testRenderWithClass()
         {
             $optionsArray = [
-                'ulClass' => 'tester'
+                'ul_class' => 'tester'
             ];
 
             $attributes = [];
@@ -111,7 +111,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(1))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $this->options->expects($this->at(2))
@@ -127,7 +127,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
         public function testRenderWithAttributes()
         {
             $optionsArray = [
-                'ulClass' => null
+                'ul_class' => null
             ];
 
             $attributes = [
@@ -147,7 +147,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(1))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $this->options->expects($this->at(2))
@@ -296,7 +296,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
             $optionsData = [
                 'assertion' => $assertionName,
                 'render' => true,
-                'liClass' => null,
+                'li_class' => null,
             ];
 
             $url = 'http://spotonlive.dk';
@@ -380,7 +380,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
             $optionsData = [
                 'assertion' => $assertionName,
                 'render' => true,
-                'liClass' => null,
+                'li_class' => null,
             ];
 
             $url = 'http://spotonlive.dk';
@@ -464,7 +464,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
             $optionsData = [
                 'assertion' => $assertionName,
                 'render' => true,
-                'liClass' => 'hidden',
+                'li_class' => 'hidden',
             ];
 
             $url = 'http://spotonlive.dk';
@@ -548,13 +548,13 @@ namespace SpotOnLive\NavigationTest\Navigation {
             $optionsData = [
                 'assertion' => $assertionName,
                 'render' => true,
-                'liClass' => null,
-                'ulClass' => 'visible',
+                'li_class' => null,
+                'ul_class' => 'visible',
             ];
 
             $subPageOptionsData = [
                 'render' => true,
-                'liClass' => null,
+                'li_class' => null,
             ];
 
             $url = 'http://spotonlive.dk';
@@ -736,7 +736,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(0))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $result = $this->navigation->getAttributes();
@@ -753,7 +753,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->options->expects($this->at(0))
                 ->method('get')
-                ->with('ulAttributes')
+                ->with('ul_attributes')
                 ->willReturn($attributes);
 
             $result = $this->navigation->getAttributes();

@@ -75,10 +75,6 @@ class Page implements PageInterface
         // Route
         if (isset($options['route'])) {
             if ($currentRoute->getName() == $options['route']) {
-                if (!$options['route_parameters']) {
-                    return true;
-                }
-
                 if (URL::current() == route($options['route'], $options['route_parameters'])) {
                     return true;
                 }

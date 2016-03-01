@@ -7,7 +7,7 @@ class ContainerOptions extends Options implements OptionsInterface
     /** @var array */
     protected $defaults = [
         'options' => [
-            'ulClass' => null,
+            'ul_class' => null,
             'depth' => null,
         ],
 
