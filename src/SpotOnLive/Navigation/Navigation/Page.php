@@ -5,6 +5,7 @@ namespace SpotOnLive\Navigation\Navigation;
 use Route;
 use SpotOnLive\Navigation\Exceptions\NoRouteException;
 use SpotOnLive\Navigation\Options\PageOptions;
+use URL;
 
 class Page implements PageInterface
 {
@@ -49,31 +50,44 @@ class Page implements PageInterface
         $options = $this->options->get('options');
 
         if (!isset($options['route']) && !isset($options['url'])) {
-            throw new NoRouteException('Please provide a route or url');
+            throw new NoRouteException();
         }
 
         if (isset($options['route'])) {
-            return route($options['route']);
+            return route($options['route'], $options['route_parameters']);
         }
 
         return $options['url'];
     }
 
-    public function isActive()
+    /**
+     * Check if page is active
+     *
+     * @return bool
+     */
+    public function  isActive()
     {
         $options = $this->options->get('options');
 
         /** @var \Illuminate\Routing\Route $currentRoute */
         $currentRoute = Route::current();
 
+        // Route
         if (isset($options['route'])) {
             if ($currentRoute->getName() == $options['route']) {
-                return true;
+                if (!$options['route_parameters']) {
+                    return true;
+                }
+
+                if (URL::current() == route($options['route'], $options['route_parameters'])) {
+                    return true;
+                }
             }
-        } else {
-            if ($currentRoute->getUri() == $options['url']) {
-                return true;
-            }
+        }
+
+        // URL
+        if (isset($options['url']) && $currentRoute->getUri() == $options['url']) {
+            return true;
         }
 
         // Check for active sub page
@@ -130,7 +144,7 @@ class Page implements PageInterface
      */
     public function getAttributes($type = "li")
     {
-        $attributes = $this->options->get($type . 'Attributes');
+        $attributes = $this->options->get($type . '_attributes');
 
         if (is_null($attributes)) {
             $attributes = [];
