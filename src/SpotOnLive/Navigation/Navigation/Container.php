@@ -3,8 +3,8 @@
 namespace SpotOnLive\Navigation\Navigation;
 
 use Auth;
-use SpotOnLive\Navigation\Exceptions\IllegalConfigurationException;
 use SpotOnLive\Navigation\Options\ContainerOptions;
+use SpotOnLive\Navigation\Exceptions\IllegalConfigurationException;
 
 class Container implements ContainerInterface
 {
@@ -50,7 +50,11 @@ class Container implements ContainerInterface
         $options = $this->getOptions()->get('options');
         $class = $options['ul_class'];
 
-        $html = "<ul class=\"" . $class . "\"" . $this->getAttributes() . ">\n";
+        $html = sprintf(
+            "<ul class=\"%s\"%s>\n",
+            $class,
+            $this->getAttributes()
+        );
 
         foreach ($this->getPages() as $page) {
             $html .= $this->renderPage($page, $maxDepth);
@@ -118,15 +122,23 @@ class Container implements ContainerInterface
             $classes[] = 'active';
         }
 
-        $html = "   <li class=\"" . implode(" ", $classes) . "\"" . $page->getAttributes('li') . ">\n";
-        $html .= '      <a href="' . $page->getUrl() . '"' . $page->getAttributes('a') . '>' . $page->getLabel() . "</a>\n";
+        $html = sprintf(
+            "      <a href=\"%s\"%s>%s</a>\n",
+            $page->getUrl(),
+            $page->getAttributes('a'),
+            $page->getLabel()
+        );
 
         $pages = $page->getPages();
 
         if (count($pages) && (is_null($maxDepth) || $maxDepth != $depth)) {
             $ul_class = $options['ul_class'];
 
-            $html .= "      <ul class=\"" . $ul_class . "\"" . $page->getAttributes('ul') . ">\n";
+            $html .= sprintf(
+                "      <ul class=\"%s\"%s>\n",
+                $ul_class,
+                $page->getAttributes('ul')
+            );
 
             foreach ($pages as $subPage) {
                 $html .= $this->renderPage($subPage, $maxDepth, ($depth + 1));
@@ -135,9 +147,21 @@ class Container implements ContainerInterface
             $html .= "      </ul>\n";
         }
 
-        $html .= "    </li>\n";
+        // Use wrapper from config
+        $wrappedHtml = sprintf(
+            $options['wrapper'],
+            $html
+        );
 
-        return $html;
+        // Wrap in <li> tag
+        $li = sprintf(
+            "   <li class=\"%s\"%s>\n%s    </li>\n",
+            implode(" ", $classes),
+            $page->getAttributes('li'),
+            $wrappedHtml
+        );
+
+        return $li;
     }
 
     /**

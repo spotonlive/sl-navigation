@@ -20,6 +20,9 @@ class PageOptions extends Options implements OptionsInterface
             // Classes
             'li_class' => null,
             'ul_class' => null,
+
+            // Wrapper
+            'wrapper' => '%s',
         ],
 
         // Attributes
