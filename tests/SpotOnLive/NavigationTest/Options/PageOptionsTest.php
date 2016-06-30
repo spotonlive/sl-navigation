@@ -17,6 +17,7 @@ class PageOptionsTest extends PHPUnit_Framework_TestCase
             'escape_html' => true,
             'li_class' => null,
             'ul_class' => null,
+            'wrapper' => '%s',
         ],
         'attributes' => [],
         'pages' => []
@@ -61,6 +62,7 @@ class PageOptionsTest extends PHPUnit_Framework_TestCase
                 'escape_html' => true,
                 'li_class' => null,
                 'ul_class' => null,
+                'wrapper' => '%s',
             ],
             'attributes' => [],
             'pages' => [],

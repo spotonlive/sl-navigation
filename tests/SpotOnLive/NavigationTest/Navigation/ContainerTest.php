@@ -21,6 +21,9 @@ namespace SpotOnLive\Navigation\Navigation {
 
 namespace SpotOnLive\NavigationTest\Navigation {
 
+    use SpotOnLive\Navigation\Navigation\Page;
+    use SpotOnLive\Navigation\Options\PageOptions;
+
     class ContainerTest extends \PHPUnit_Framework_TestCase
     {
         // @codingStandardsIgnoreEnd
@@ -162,8 +165,8 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
         public function testRenderPageMaxDepth()
         {
-            /** @var \SpotOnLive\Navigation\Navigation\Page $page */
-            $page = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $page */
+            $page = $this->getMock(Page::class);
             $maxDepth = 1;
             $depth = 2;
 
@@ -181,11 +184,11 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 'render' => false,
             ];
 
-            /** @var \SpotOnLive\Navigation\Navigation\Page $page */
-            $page = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $page */
+            $page = $this->getMock(Page::class);
 
-            /** @var \SpotOnLive\Navigation\Options\PageOptions $options */
-            $options = $this->getMock('\SpotOnLive\Navigation\Options\PageOptions');
+            /** @var PageOptions $options */
+            $options = $this->getMock(PageOptions::class);
 
             $page->expects($this->at(0))
                 ->method('getOptions')
@@ -213,11 +216,11 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 'render' => true,
             ];
 
-            /** @var \SpotOnLive\Navigation\Navigation\Page $page */
-            $page = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $page */
+            $page = $this->getMock(Page::class);
 
-            /** @var \SpotOnLive\Navigation\Options\PageOptions $options */
-            $options = $this->getMock('\SpotOnLive\Navigation\Options\PageOptions');
+            /** @var PageOptions $options */
+            $options = $this->getMock(PageOptions::class);
 
             $page->expects($this->at(0))
                 ->method('getOptions')
@@ -256,11 +259,11 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->navigation->setAssertionService($assertionService);
 
-            /** @var \SpotOnLive\Navigation\Navigation\Page $page */
-            $page = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $page */
+            $page = $this->getMock(Page::class);
 
-            /** @var \SpotOnLive\Navigation\Options\PageOptions $options */
-            $options = $this->getMock('\SpotOnLive\Navigation\Options\PageOptions');
+            /** @var PageOptions $options */
+            $options = $this->getMock(PageOptions::class);
 
             $user = $this->getMock('stdClass');
 
@@ -297,6 +300,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 'assertion' => $assertionName,
                 'render' => true,
                 'li_class' => null,
+                'wrapper' => '%s',
             ];
 
             $url = 'http://spotonlive.dk';
@@ -309,11 +313,11 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->navigation->setAssertionService($assertionService);
 
-            /** @var \SpotOnLive\Navigation\Navigation\Page $page */
-            $page = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $page */
+            $page = $this->getMock(Page::class);
 
-            /** @var \SpotOnLive\Navigation\Options\PageOptions $options */
-            $options = $this->getMock('\SpotOnLive\Navigation\Options\PageOptions');
+            /** @var PageOptions $options */
+            $options = $this->getMock(PageOptions::class);
 
             $user = $this->getMock('stdClass');
 
@@ -339,26 +343,26 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 ->willReturn(true);
 
             $page->expects($this->at(2))
-                ->method('getAttributes')
-                ->with('li')
-                ->willReturn(null);
-
-            $page->expects($this->at(3))
                 ->method('getUrl')
                 ->willReturn($url);
 
-            $page->expects($this->at(4))
+            $page->expects($this->at(3))
                 ->method('getAttributes')
                 ->with('a')
                 ->willReturn(null);
 
-            $page->expects($this->at(5))
+            $page->expects($this->at(4))
                 ->method('getLabel')
                 ->willReturn($label);
 
-            $page->expects($this->at(6))
+            $page->expects($this->at(5))
                 ->method('getPages')
                 ->willReturn($pages);
+
+            $page->expects($this->at(6))
+                ->method('getAttributes')
+                ->with('li')
+                ->willReturn(null);
 
             $expected = '   <li class="active">
       <a href="http://spotonlive.dk">spotonlive</a>
@@ -381,6 +385,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 'assertion' => $assertionName,
                 'render' => true,
                 'li_class' => null,
+                'wrapper' => '%s',
             ];
 
             $url = 'http://spotonlive.dk';
@@ -393,11 +398,11 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->navigation->setAssertionService($assertionService);
 
-            /** @var \SpotOnLive\Navigation\Navigation\Page $page */
-            $page = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $page */
+            $page = $this->getMock(Page::class);
 
-            /** @var \SpotOnLive\Navigation\Options\PageOptions $options */
-            $options = $this->getMock('\SpotOnLive\Navigation\Options\PageOptions');
+            /** @var PageOptions $options */
+            $options = $this->getMock(PageOptions::class);
 
             $user = $this->getMock('stdClass');
 
@@ -423,26 +428,26 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 ->willReturn(false);
 
             $page->expects($this->at(2))
-                ->method('getAttributes')
-                ->with('li')
-                ->willReturn(null);
-
-            $page->expects($this->at(3))
                 ->method('getUrl')
                 ->willReturn($url);
 
-            $page->expects($this->at(4))
+            $page->expects($this->at(3))
                 ->method('getAttributes')
                 ->with('a')
                 ->willReturn(null);
 
-            $page->expects($this->at(5))
+            $page->expects($this->at(4))
                 ->method('getLabel')
                 ->willReturn($label);
 
-            $page->expects($this->at(6))
+            $page->expects($this->at(5))
                 ->method('getPages')
                 ->willReturn($pages);
+
+            $page->expects($this->at(6))
+                ->method('getAttributes')
+                ->with('li')
+                ->willReturn(null);
 
             $expected = '   <li class="">
       <a href="http://spotonlive.dk">spotonlive</a>
@@ -465,6 +470,7 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 'assertion' => $assertionName,
                 'render' => true,
                 'li_class' => 'hidden',
+                'wrapper' => '%s',
             ];
 
             $url = 'http://spotonlive.dk';
@@ -477,11 +483,11 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->navigation->setAssertionService($assertionService);
 
-            /** @var \SpotOnLive\Navigation\Navigation\Page $page */
-            $page = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $page */
+            $page = $this->getMock(Page::class);
 
-            /** @var \SpotOnLive\Navigation\Options\PageOptions $options */
-            $options = $this->getMock('\SpotOnLive\Navigation\Options\PageOptions');
+            /** @var PageOptions $options */
+            $options = $this->getMock(PageOptions::class);
 
             $user = $this->getMock('stdClass');
 
@@ -507,26 +513,26 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 ->willReturn(false);
 
             $page->expects($this->at(2))
-                ->method('getAttributes')
-                ->with('li')
-                ->willReturn(null);
-
-            $page->expects($this->at(3))
                 ->method('getUrl')
                 ->willReturn($url);
 
-            $page->expects($this->at(4))
+            $page->expects($this->at(3))
                 ->method('getAttributes')
                 ->with('a')
                 ->willReturn(null);
 
-            $page->expects($this->at(5))
+            $page->expects($this->at(4))
                 ->method('getLabel')
                 ->willReturn($label);
 
-            $page->expects($this->at(6))
+            $page->expects($this->at(5))
                 ->method('getPages')
                 ->willReturn($pages);
+
+            $page->expects($this->at(6))
+                ->method('getAttributes')
+                ->with('li')
+                ->willReturn(null);
 
             $expected = '   <li class="hidden">
       <a href="http://spotonlive.dk">spotonlive</a>
@@ -550,11 +556,13 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 'render' => true,
                 'li_class' => null,
                 'ul_class' => 'visible',
+                'wrapper' => '%s',
             ];
 
             $subPageOptionsData = [
                 'render' => true,
                 'li_class' => null,
+                'wrapper' => '%s',
             ];
 
             $url = 'http://spotonlive.dk';
@@ -563,8 +571,8 @@ namespace SpotOnLive\NavigationTest\Navigation {
             $subPageUrl = 'http://spotonmarketing.dk';
             $subPageLabel = 'spotonmarketing';
 
-            /** @var \SpotOnLive\Navigation\Navigation\Page $subPage */
-            $subPage = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $subPage */
+            $subPage = $this->getMock(Page::class);
 
             $pages = [
                 $subPage,
@@ -576,14 +584,14 @@ namespace SpotOnLive\NavigationTest\Navigation {
 
             $this->navigation->setAssertionService($assertionService);
 
-            /** @var \SpotOnLive\Navigation\Navigation\Page $page */
-            $page = $this->getMock('\SpotOnLive\Navigation\Navigation\Page');
+            /** @var Page $page */
+            $page = $this->getMock(Page::class);
 
-            /** @var \SpotOnLive\Navigation\Options\PageOptions $options */
-            $options = $this->getMock('\SpotOnLive\Navigation\Options\PageOptions');
+            /** @var PageOptions $options */
+            $options = $this->getMock(PageOptions::class);
 
-            /** @var \SpotOnLive\Navigation\Options\PageOptions $subPageOptions */
-            $subPageOptions = $this->getMock('\SpotOnLive\Navigation\Options\PageOptions');
+            /** @var PageOptions $subPageOptions */
+            $subPageOptions = $this->getMock(PageOptions::class);
 
             $user = $this->getMock('stdClass');
 
@@ -609,30 +617,30 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 ->willReturn(false);
 
             $page->expects($this->at(2))
-                ->method('getAttributes')
-                ->with('li')
-                ->willReturn(null);
-
-            $page->expects($this->at(3))
                 ->method('getUrl')
                 ->willReturn($url);
 
-            $page->expects($this->at(4))
+            $page->expects($this->at(3))
                 ->method('getAttributes')
                 ->with('a')
                 ->willReturn(null);
 
-            $page->expects($this->at(5))
+            $page->expects($this->at(4))
                 ->method('getLabel')
                 ->willReturn($label);
 
-            $page->expects($this->at(6))
+            $page->expects($this->at(5))
                 ->method('getPages')
                 ->willReturn($pages);
 
-            $page->expects($this->at(7))
+            $page->expects($this->at(6))
                 ->method('getAttributes')
                 ->with('ul')
+                ->willReturn(null);
+
+            $page->expects($this->at(7))
+                ->method('getAttributes')
+                ->with('li')
                 ->willReturn(null);
 
             $subPage->expects($this->at(0))
@@ -649,26 +657,26 @@ namespace SpotOnLive\NavigationTest\Navigation {
                 ->willReturn(false);
 
             $subPage->expects($this->at(2))
-                ->method('getAttributes')
-                ->with('li')
-                ->willReturn(null);
-
-            $subPage->expects($this->at(3))
                 ->method('getUrl')
                 ->willReturn($subPageUrl);
 
-            $subPage->expects($this->at(4))
+            $subPage->expects($this->at(3))
                 ->method('getAttributes')
                 ->with('a')
                 ->willReturn(null);
 
-            $subPage->expects($this->at(5))
+            $subPage->expects($this->at(4))
                 ->method('getLabel')
                 ->willReturn($subPageLabel);
 
-            $subPage->expects($this->at(6))
+            $subPage->expects($this->at(5))
                 ->method('getPages')
                 ->willReturn([]);
+
+            $subPage->expects($this->at(6))
+                ->method('getAttributes')
+                ->with('li')
+                ->willReturn(null);
 
             $result = $this->navigation->renderPage($page, $maxDepth, $depth);
 
