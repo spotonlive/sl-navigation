@@ -29,6 +29,6 @@ class PageOptions extends Options implements OptionsInterface
         'attributes' => [],
 
         // Sub pages
-        'pages' => []
+        'pages' => [],
     ];
 }

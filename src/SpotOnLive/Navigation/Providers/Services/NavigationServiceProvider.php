@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Dynamic navigations for Laravel 5.1
+ * Dynamic navigations for Laravel 5+
  *
  * @license MIT
  * @package SpotOnLive\Navigation
@@ -31,7 +31,7 @@ class NavigationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(NavigationService::class, function (Application $app) {
+        $this->app->bind(NavigationService::class, function () {
             $navigationConfig = config('navigation');
 
             if (is_null($navigationConfig)) {

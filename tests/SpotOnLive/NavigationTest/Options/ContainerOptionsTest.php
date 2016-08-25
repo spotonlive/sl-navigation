@@ -10,6 +10,10 @@ class ContainerOptionsTest extends PHPUnit_Framework_TestCase
     protected $options;
 
     protected $defaults = [
+        'provider' => \SpotOnLive\Navigation\Navigation\Providers\ArrayProvider::class,
+
+        'provider_options' => [],
+
         'options' => [
             'ul_class' => null,
             'depth' => null,
@@ -56,6 +60,10 @@ class ContainerOptionsTest extends PHPUnit_Framework_TestCase
     public function testGetOptions()
     {
         $options = [
+            'provider' => \SpotOnLive\Navigation\Navigation\Providers\ArrayProvider::class,
+
+            'provider_options' => [],
+
             'options' => [
                 'ul_class' => null,
                 'depth' => null,

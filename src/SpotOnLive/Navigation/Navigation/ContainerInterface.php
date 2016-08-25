@@ -21,6 +21,8 @@ interface ContainerInterface
     public function renderPartial($partial);
 
     /**
+     * Get an array of pages
+     *
      * @return array|PageInterface[]
      */
     public function getPages();
