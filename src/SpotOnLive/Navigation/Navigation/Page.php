@@ -70,7 +70,10 @@ class Page implements PageInterface
         $options = $this->options->get('options');
 
         /** @var \Illuminate\Routing\Route $currentRoute */
-        $currentRoute = Route::current();
+        if (!$currentRoute = Route::current()) {
+            // No matched route
+            return false;
+        }
 
         // Route
         if (isset($options['route'])) {
