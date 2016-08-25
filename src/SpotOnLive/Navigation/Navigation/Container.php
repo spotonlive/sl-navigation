@@ -22,6 +22,8 @@ class Container implements ContainerInterface
     {
         $this->options = new ContainerOptions($config);
         $this->assertionService = $assertionService;
+
+        $this->prepare();
     }
 
     /**
@@ -217,6 +219,48 @@ class Container implements ContainerInterface
     }
 
     /**
+     * Prepare container
+     *
+     * @return bool
+     * @throws IllegalConfigurationException
+     */
+    protected function prepare()
+    {
+        $options = $this->getOptions();
+
+        $providerClass = $options->get('provider');
+        $providerOptions = $options->get('provider_options');
+
+        if (!class_exists($providerClass)) {
+            throw new IllegalConfigurationException(
+                sprintf(
+                    'Provider class not found: %s',
+                    $providerClass
+                )
+            );
+        }
+
+        /** @var Providers\NavigationProviderInterface $provider */
+        $provider = app($providerClass);
+
+        if (!$provider instanceof Providers\NavigationProviderInterface) {
+            throw new IllegalConfigurationException(
+                sprintf(
+                    '%s must implement %s',
+                    $providerClass,
+                    Providers\NavigationProviderInterface::class
+                )
+            );
+        }
+
+        $provider->setOptions($providerOptions);
+
+        $this->setOptions($provider->resolve($options));
+
+        return true;
+    }
+
+    /**89
      * @return ContainerOptions
      */
     public function getOptions()

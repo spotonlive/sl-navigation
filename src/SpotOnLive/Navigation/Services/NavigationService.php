@@ -34,6 +34,7 @@ class NavigationService implements NavigationServiceInterface
     public function render($name)
     {
         $container = $this->getContainer($name);
+
         return $container->render();
     }
 

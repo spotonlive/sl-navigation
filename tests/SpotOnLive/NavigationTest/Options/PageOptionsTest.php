@@ -19,8 +19,9 @@ class PageOptionsTest extends PHPUnit_Framework_TestCase
             'ul_class' => null,
             'wrapper' => '%s',
         ],
+
         'attributes' => [],
-        'pages' => []
+        'pages' => [],
     ];
 
     protected $demoOptions = [
@@ -64,9 +65,10 @@ class PageOptionsTest extends PHPUnit_Framework_TestCase
                 'ul_class' => null,
                 'wrapper' => '%s',
             ],
+
             'attributes' => [],
             'pages' => [],
-            'a' => 'b'
+            'a' => 'b',
         ];
 
         $result = $this->options->getOptions();
